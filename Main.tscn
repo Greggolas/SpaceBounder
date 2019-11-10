@@ -1,25 +1,36 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Platform.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=3]
 
-[node name="Node" type="Node"]
+[node name="Main" type="Node"]
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_horizontal_guides_": [ 2.21452 ],
-"_edit_vertical_guides_": [ -45.9457 ]
+"_edit_vertical_guides_": [ -45.9457, 161.357, 80.4363, 240.69, 321.611, 400.945 ]
 }
+Platform = ExtResource( 2 )
 
-[node name="Spawn1" type="Position2D" parent="."]
+[node name="PlatformSpawn0" type="Position2D" parent="."]
 position = Vector2( 80, 740 )
 
-[node name="Spawn2" type="Position2D" parent="."]
+[node name="PlatformSpawn1" type="Position2D" parent="."]
 position = Vector2( 160, 740 )
 
-[node name="Spawn3" type="Position2D" parent="."]
+[node name="PlatformSpawn2" type="Position2D" parent="."]
 position = Vector2( 240, 740 )
 
-[node name="Spawn4" type="Position2D" parent="."]
+[node name="PlatformSpawn3" type="Position2D" parent="."]
 position = Vector2( 320, 740 )
 
-[node name="Spawn5" type="Position2D" parent="."]
+[node name="PlatformSpawn4" type="Position2D" parent="."]
 position = Vector2( 400, 740 )
+
+[node name="PlayerSpawn" type="Position2D" parent="."]
+position = Vector2( 240, 117.945 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+
+[node name="PlatformSpawnTimer" type="Timer" parent="."]
+[connection signal="timeout" from="PlatformSpawnTimer" to="." method="_on_PlatformSpawnTimer_timeout"]
