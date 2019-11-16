@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://art/green_in.png" type="Texture" id=2]
 [ext_resource path="res://art/green_right.png" type="Texture" id=3]
 [ext_resource path="res://art/green_out.png" type="Texture" id=4]
@@ -43,3 +43,13 @@ scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 2 )
 animation = "player_idle"
 playing = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="AreaCollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 0.179246, 2.33016 )
+scale = Vector2( 3.27639, 1.01792 )
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
