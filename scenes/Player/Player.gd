@@ -7,6 +7,8 @@ const FALL_SPEED = 150
 
 var velocity = Vector2(0,FALL_SPEED)
 var screen_size
+var game_started = false
+var collision
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,12 +36,21 @@ func _physics_process(delta):
 	else:
 		velocity.x = 0
 	
-	move_and_slide(velocity, Vector2(0, -1))
+	if game_started:
+		move_and_slide(velocity, Vector2(0, -1))
+
+func _on_VisibilityNotifier2D_screen_exited():
+	die()
+
+func _on_Area2D_area_entered(area):
+	die()
 
 func spawn(pos):
 	position = pos
 	show()
-
-func _on_VisibilityNotifier2D_screen_exited():
-	emit_signal("die")
+	game_started = true
+	
+func die():
+	emit_signal('die')
 	hide()
+	game_started = false

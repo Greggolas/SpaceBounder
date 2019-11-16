@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/Main/Main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Platform/Platform.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/Player/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/HUD/HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Enemy/Enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/HUD/HUD.tscn" type="PackedScene" id=5]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -12,6 +13,12 @@ __meta__ = {
 "_edit_vertical_guides_": [ -45.9457, 161.357, 80.4363, 240.69, 321.611, 400.945 ]
 }
 Platform = ExtResource( 2 )
+Enemy = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.298039, 0.298039, 0.298039, 1 )
 
 [node name="PlatformSpawn0" type="Position2D" parent="."]
 position = Vector2( 80, 740 )
@@ -31,14 +38,36 @@ position = Vector2( 400, 740 )
 [node name="PlayerSpawn" type="Position2D" parent="."]
 position = Vector2( 240, 117.945 )
 
-[node name="Player" parent="." instance=ExtResource( 3 )]
+[node name="Player" parent="." instance=ExtResource( 4 )]
 
 [node name="PlatformSpawnTimer" type="Timer" parent="."]
 
 [node name="ScoreTimer" type="Timer" parent="."]
 
-[node name="HUD" parent="." instance=ExtResource( 4 )]
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="HUD" parent="." instance=ExtResource( 5 )]
+
+[node name="EnemySpawn0" type="Position2D" parent="."]
+position = Vector2( 0, 180 )
+
+[node name="EnemySpawn1" type="Position2D" parent="."]
+position = Vector2( 0, 360 )
+
+[node name="EnemySpawn2" type="Position2D" parent="."]
+position = Vector2( 0, 540 )
+
+[node name="EnemySpawn3" type="Position2D" parent="."]
+position = Vector2( 480, 180 )
+
+[node name="EnemySpawn4" type="Position2D" parent="."]
+position = Vector2( 480, 360 )
+
+[node name="EnemySpawn5" type="Position2D" parent="."]
+position = Vector2( 480, 540 )
 [connection signal="die" from="Player" to="." method="_on_Player_die"]
 [connection signal="timeout" from="PlatformSpawnTimer" to="." method="_on_PlatformSpawnTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 [connection signal="start_game" from="HUD" to="." method="_on_HUD_start_game"]

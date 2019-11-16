@@ -10,3 +10,6 @@ func _ready():
 func _process(delta):
 	position.y -= MOVE_SPEED * delta
 	
+	
+func _on_VisibilityEnabler2D_screen_exited():
+	queue_free()

@@ -1,9 +1,11 @@
 extends Node
 
 export (PackedScene) var Platform
+export (PackedScene) var Enemy
 
 const READY_TEXT = 'GET READY'
 var num_platform_locations = 5
+var num_enemy_locations = 6
 var score
 
 func _ready():
@@ -25,6 +27,29 @@ func _on_PlatformSpawnTimer_timeout():
 	if platform_location == 4:
 		new_platform.position = $PlatformSpawn4.position
 
+func _on_EnemySpawnTimer_timeout():
+	var enemy_location = randi() % num_enemy_locations
+	var new_enemy = Enemy.instance()
+	add_child(new_enemy)
+	
+	if enemy_location == 0:
+		new_enemy.position = $EnemySpawn0.position
+	if enemy_location == 1:
+		new_enemy.position = $EnemySpawn1.position
+	if enemy_location == 2:
+		new_enemy.position = $EnemySpawn2.position
+	if enemy_location == 3:
+		new_enemy.position = $EnemySpawn3.position
+	if enemy_location == 4:
+		new_enemy.position = $EnemySpawn4.position
+	if enemy_location == 5:
+		new_enemy.position = $EnemySpawn5.position
+		
+	if enemy_location > (num_enemy_locations / 2) - 1:
+		new_enemy.direction = 'left'
+	else:
+		new_enemy.direction = 'right'
+
 func _on_Player_die():
 	game_over()
 
@@ -42,12 +67,14 @@ func _on_HUD_start_game():
 func game_over():
 	$ScoreTimer.stop()
 	$PlatformSpawnTimer.stop()
+	$EnemySpawnTimer.stop()
 	$HUD.show_game_over()
 
 func new_game():
 	score = 0
 	$Player.spawn($PlayerSpawn.position)
 	$PlatformSpawnTimer.start()
+	$EnemySpawnTimer.start()
 	$HUD.update_score(score)
 	$HUD.show_message(READY_TEXT)
 	$ScoreTimer.start()
