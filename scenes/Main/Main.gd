@@ -6,6 +6,8 @@ export (PackedScene) var Enemy
 
 const READY_TEXT = 'GET READY'
 const DOG_ODDS = 10
+const SAVE_GAME_FILE = 'user://savegame.save'
+const PERSISTENT_GROUP = 'Persist'
 var num_platform_locations = 5
 var num_enemy_locations = 6
 var score
@@ -14,6 +16,7 @@ var current_buffer = 0
 
 
 func _ready():
+	$HUD.load_high_score(SAVE_GAME_FILE)
 	randomize()
 	
 
@@ -89,8 +92,10 @@ func game_over():
 	$ScoreTimer.stop()
 	$PlatformSpawnTimer.stop()
 	$EnemySpawnTimer.stop()
+	$HUD.set_high_score()
 	$HUD.show_game_over()
 	current_buffer = 0
+	save_game()
 
 
 func new_game():
@@ -101,3 +106,13 @@ func new_game():
 	$Player.spawn($PlayerSpawn.position)
 	$ScoreTimer.start()
 	$EnemySpawnTimer.start()
+
+
+func save_game():
+	var save_game = File.new()
+	save_game.open(SAVE_GAME_FILE, File.WRITE)
+	var save_nodes = get_tree().get_nodes_in_group(PERSISTENT_GROUP)
+	for i in save_nodes:
+		var node_data = i.call('save');
+		save_game.store_line(to_json(node_data))
+	save_game.close()
