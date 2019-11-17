@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/HUD/HUD.gd" type="Script" id=1]
 [ext_resource path="res://fonts/PixelEmulator-xq08.ttf" type="DynamicFontData" id=2]
@@ -19,6 +19,12 @@ bg_color = Color( 0.968627, 0.0431373, 0.654902, 1 )
 [sub_resource type="DynamicFont" id=5]
 size = 48
 font_data = ExtResource( 2 )
+
+[sub_resource type="InputEventAction" id=7]
+action = "ui_select"
+
+[sub_resource type="ShortCut" id=8]
+shortcut = SubResource( 7 )
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 120, 360 )
@@ -59,6 +65,7 @@ custom_styles/pressed = SubResource( 3 )
 custom_styles/normal = SubResource( 4 )
 custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+shortcut = SubResource( 8 )
 text = "START"
 
 [node name="MessageTimer" type="Timer" parent="."]
