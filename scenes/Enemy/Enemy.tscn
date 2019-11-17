@@ -15,13 +15,16 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=2]
 radius = 32.5072
 
-[node name="Enemy" type="Area2D"]
+[node name="Enemy" type="Area2D" groups=[
+"Enemies",
+]]
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
 animation = "moving"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

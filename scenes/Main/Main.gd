@@ -20,6 +20,7 @@ func _ready():
 func _on_PlatformSpawnTimer_timeout():
 	var platform_location = randi() % num_platform_locations
 	var new_platform = Platform.instance()
+	$HUD.connect("start_game", new_platform, "_on_start_game")
 	
 	if current_buffer < safety_buffer:
 		current_buffer += 1
@@ -43,6 +44,7 @@ func _on_PlatformSpawnTimer_timeout():
 func _on_EnemySpawnTimer_timeout():
 	var enemy_location = randi() % num_enemy_locations
 	var new_enemy = Enemy.instance()
+	$HUD.connect("start_game", new_enemy, "_on_start_game")
 	
 	if enemy_location == 0:
 		new_enemy.position = $EnemySpawn0.position
@@ -92,7 +94,7 @@ func game_over():
 
 
 func new_game():
-	score = 0
+	score = 0	
 	$PlatformSpawnTimer.start()
 	$HUD.update_score(score)
 	$HUD.show_message(READY_TEXT)

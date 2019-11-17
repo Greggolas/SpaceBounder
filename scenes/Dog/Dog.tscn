@@ -15,7 +15,9 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 24.6691, 12.7038 )
 
-[node name="Dog" type="Area2D"]
+[node name="Dog" type="Area2D" groups=[
+"Enemies",
+]]
 script = ExtResource( 1 )
 Bullet = ExtResource( 2 )
 

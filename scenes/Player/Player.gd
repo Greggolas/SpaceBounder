@@ -10,15 +10,14 @@ var screen_size
 var game_started = false
 var collision
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	screen_size = get_viewport_rect().size
 	hide()
 
+
 func _physics_process(delta):
 	position.x = clamp(position.x, 0, screen_size.x)
-	
-	# if touch input set touch direction
 	
 	if Input.is_action_pressed('ui_left'):
 		velocity.x = -MOVE_SPEED
@@ -40,16 +39,20 @@ func _physics_process(delta):
 	if game_started:
 		move_and_slide(velocity, Vector2(0, -1))
 
+
 func _on_VisibilityNotifier2D_screen_exited():
 	die()
 
+
 func _on_Area2D_area_entered(area):
 	die()
+
 
 func spawn(pos):
 	position = pos
 	show()
 	game_started = true
+
 	
 func die():
 	emit_signal('die')

@@ -5,7 +5,7 @@ export (PackedScene) var Dog
 const MOVE_SPEED = 200
 var has_dog = false
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	if has_dog:
 		var dog = Dog.instance()
@@ -16,10 +16,13 @@ func _ready():
 		add_child(dog)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	position.y -= MOVE_SPEED * delta
 	
-	
+
 func _on_VisibilityEnabler2D_screen_exited():
+	queue_free()
+	
+
+func _on_start_game():
 	queue_free()
