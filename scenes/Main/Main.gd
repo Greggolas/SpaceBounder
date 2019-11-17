@@ -88,6 +88,7 @@ func game_over():
 	$PlatformSpawnTimer.stop()
 	$EnemySpawnTimer.stop()
 	$HUD.show_game_over()
+	current_buffer = 0
 
 
 func new_game():
