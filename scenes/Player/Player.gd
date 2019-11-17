@@ -16,7 +16,17 @@ func _ready():
 	hide()
 
 func _physics_process(delta):
-
+	position.x = clamp(position.x, 0, screen_size.x)
+	
+	# if touch input set touch direction
+	
+	if Input.is_action_pressed('ui_left'):
+		velocity.x = -MOVE_SPEED
+	elif Input.is_action_pressed('ui_right'):
+		velocity.x =  MOVE_SPEED
+	else:
+		velocity.x = 0
+	
 	if velocity.x > 0:
 		$AnimatedSprite.animation = 'player_right'
 	elif velocity.x < 0:
@@ -26,15 +36,6 @@ func _physics_process(delta):
 		$AnimatedSprite.flip_v = velocity.y > 0
 	else:
 		$AnimatedSprite.animation = 'player_idle'
-		
-	position.x = clamp(position.x, 0, screen_size.x)
-	
-	if Input.is_action_pressed('ui_left'):
-		velocity.x = -MOVE_SPEED
-	elif Input.is_action_pressed('ui_right'):
-		velocity.x =  MOVE_SPEED
-	else:
-		velocity.x = 0
 	
 	if game_started:
 		move_and_slide(velocity, Vector2(0, -1))
