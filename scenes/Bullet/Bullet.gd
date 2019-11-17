@@ -1,7 +1,6 @@
 extends Area2D
 
 const MOVE_SPEED = 200
-var start_postition
 var direction
 
 # Called when the node enters the scene tree for the first time.
@@ -10,7 +9,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
 	if direction == 'right':
 		position.x += MOVE_SPEED * delta
 	if direction == 'left':
