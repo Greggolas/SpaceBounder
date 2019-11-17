@@ -80,13 +80,11 @@ text = "START"
 one_shot = true
 
 [node name="TouchScreenButtonLeft" type="TouchScreenButton" parent="."]
-visible = false
 position = Vector2( 120, 360 )
 shape = SubResource( 6 )
 action = "ui_left"
 
 [node name="TouchScreenButtonRight" type="TouchScreenButton" parent="."]
-visible = false
 position = Vector2( 360, 360 )
 shape = SubResource( 6 )
 action = "ui_right"
