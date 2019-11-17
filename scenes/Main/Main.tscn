@@ -43,7 +43,7 @@ position = Vector2( 240, 117.945 )
 [node name="Player" parent="." instance=ExtResource( 5 )]
 
 [node name="PlatformSpawnTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.75
 
 [node name="ScoreTimer" type="Timer" parent="."]
 
