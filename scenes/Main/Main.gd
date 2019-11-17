@@ -9,6 +9,8 @@ const DOG_ODDS = 10
 var num_platform_locations = 5
 var num_enemy_locations = 6
 var score
+var safety_buffer = 5
+var current_buffer = 0
 
 
 func _ready():
@@ -18,8 +20,12 @@ func _ready():
 func _on_PlatformSpawnTimer_timeout():
 	var platform_location = randi() % num_platform_locations
 	var new_platform = Platform.instance()
-	new_platform.has_dog = (randi() % DOG_ODDS) == 0
-
+	
+	if current_buffer < safety_buffer:
+		current_buffer += 1
+	else:
+		new_platform.has_dog = (randi() % DOG_ODDS) == 0
+	
 	add_child(new_platform)
 	
 	if platform_location == 0:

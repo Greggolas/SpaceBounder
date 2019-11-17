@@ -10,10 +10,9 @@ func _ready():
 	if has_dog:
 		var dog = Dog.instance()
 		dog.position.y = position.y - 20
-		
 		var dog_facing_right = (randi() % 2) == 0
 		dog.direction = 'right' if dog_facing_right else 'left'
-		
+
 		add_child(dog)
 
 
